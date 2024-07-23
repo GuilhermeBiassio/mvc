@@ -2,9 +2,10 @@
 
 namespace App\Controller\Pages;
 
+use App\Model\Entity\Organization;
 use App\Utils\View;
 
-class Home
+class Home extends Page
 {
     /**
      * Returns content (view) from home
@@ -12,9 +13,12 @@ class Home
      */
     public static function getHome()
     {
-        return View::render('pages/home', [
-            'title' => 'Home',
-            'description' => 'This is home page'
+        $data = new Organization();
+        $content = View::render('pages/home', [
+            'page_title' => $data->title,
+            'description' => $data->description
         ]);
+
+        return parent::getPage('Home', $content);
     }
 }
